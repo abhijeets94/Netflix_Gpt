@@ -1,8 +1,63 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
+import { auth } from "../utils/firebase"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate()
+
+  const handleButtonClick = (e) => {
+    const enterName = name.current ? name.current.value : "No Name";
+    const msg = checkValidData(
+      enterName,
+      email.current.value,
+      password.current.value 
+    );
+    setErrorMessage(msg);
+if(msg) return
+   
+if(showSignUpForm) {
+
+    createUserWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    ).then((userCredentials) => {
+        const user = userCredentials
+        navigate("/browse")
+
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message
+        setErrorMessage(`Error ${errorCode}: ${errorMessage}`);
+    })
+} else {
+    signInWithEmailAndPassword(auth,
+        email.current.value,
+        password.current.value
+      ).then((userCredentials) => {
+          const user = userCredentials
+          console.log(user);
+        navigate("/browse")
+
+      }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message
+          setErrorMessage(`Error ${errorCode}: ${errorMessage}`);
+          
+      })
+}
+    
+
+  };
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   return (
     <div>
@@ -13,12 +68,16 @@ const Login = () => {
           alt="netflix-background"
         ></img>
       </div>
-      <form className="mt-36 mx-auto right-0 left-0 w-3/12 absolute p-12 bg-black text-white opacity-90 rounded-lg">
+      <form
+        onSubmit={(event) => event.preventDefault()}
+        className="mt-36 mx-auto right-0 left-0 w-3/12 absolute p-12 bg-black text-white opacity-90 rounded-lg"
+      >
         <h1 className="font-bold text-3xl ">
           {showSignUpForm ? "Sign Up" : "Sign In"}
         </h1>
         {showSignUpForm ? (
           <input
+            ref={name}
             type="name"
             placeholder="Enter name"
             className="p-4 my-4 w-full bg-gray-800 opacity-100 rounded-lg"
@@ -27,16 +86,22 @@ const Login = () => {
           <></>
         )}
         <input
+          ref={email}
           type="email"
           placeholder="Enter email"
           className="p-4 my-4 w-full bg-gray-800 opacity-100 rounded-lg"
         ></input>
         <input
+          ref={password}
           type="password"
           placeholder="Enter password"
           className="p-4 my-4 mx-auto w-full bg-gray-800 opacity-100 rounded-lg"
         />
-        <button className="m-2 p-4 bg-red-700 w-full rounded-lg">
+        <p className="text-red-500 font-bold px-2 text-lg">{errorMessage}</p>
+        <button
+          className="m-2 p-4 bg-red-700 w-full rounded-lg"
+          onClick={handleButtonClick}
+        >
           {showSignUpForm ? "Sign Up" : "Sign In"}
         </button>
         <p className="py-4">

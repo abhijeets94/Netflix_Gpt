@@ -1,6 +1,17 @@
 # NETFLIX GPT
 
 3 - Feb - 2023
+- Create react app
+- Configure Tailwind CSS
+- Header
+- Routing of app
+- Login Form
+- Sign up
+- Form validation
+- useRef for form validation
+- firebase setup and deployment
+- Setup auth with firebase
+
 
 # Features
 
