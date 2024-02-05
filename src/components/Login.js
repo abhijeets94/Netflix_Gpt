@@ -2,13 +2,16 @@ import { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import { auth } from "../utils/firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleButtonClick = (e) => {
     const enterName = name.current ? name.current.value : "No Name";
@@ -27,8 +30,16 @@ if(showSignUpForm) {
       email.current.value,
       password.current.value
     ).then((userCredentials) => {
-        const user = userCredentials
-        navigate("/browse")
+        const user = userCredentials.user
+        updateProfile(user, {
+          displayName: name.current.value,
+        }).then(() => {
+          
+          const { uid, email, displayName } = auth.currentUser;
+          dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+
+          navigate("/browse")
+        })
 
     }).catch((error) => {
         const errorCode = error.code;
