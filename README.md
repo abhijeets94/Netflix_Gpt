@@ -11,6 +11,10 @@
 - useRef for form validation
 - firebase setup and deployment
 - Setup auth with firebase
+- implement sign out
+- added name
+- redirection
+- get movie api from TMDB
 
 
 # Features
