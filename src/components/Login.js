@@ -50,7 +50,6 @@ if(showSignUpForm) {
         password.current.value
       ).then((userCredentials) => {
           const user = userCredentials
-          console.log(user);
       
 
       }).catch((error) => {
@@ -65,7 +64,7 @@ if(showSignUpForm) {
   };
 
   const name = useRef(null);
-  const email = useRef(null);
+const email = useRef(null);
   const password = useRef(null);
 
   return (

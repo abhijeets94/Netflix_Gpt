@@ -15,6 +15,8 @@
 - added name
 - redirection
 - get movie api from TMDB
+- register and create new app and get Access Token
+- Get data from TMDB now playing movie list
 
 
 # Features
