@@ -17,6 +17,13 @@
 - get movie api from TMDB
 - register and create new app and get Access Token
 - Get data from TMDB now playing movie list
+- custom hook for now playing
+- plannig  main container and secondary container
+- update store with trailer video data
+- embedded the youtube video
+- make it autoplay and mute
+- tailwind classes to make mainContainer look awesome
+- build secondary container
 
 
 # Features
