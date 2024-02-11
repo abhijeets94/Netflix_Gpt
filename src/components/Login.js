@@ -5,6 +5,8 @@ import { auth } from "../utils/firebase"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { IMG_BG } from "../utils/constants"; 
+
 
 const Login = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
@@ -72,7 +74,7 @@ const email = useRef(null);
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/9134db96-10d6-4a64-a619-a21da22f8999/a449fabb-05e4-4c8a-b062-b0bec7d03085/IN-en-20240115-trifectadaily-perspective_alpha_website_large.jpg"
+          src={IMG_BG}
           alt="netflix-background"
         ></img>
       </div>
