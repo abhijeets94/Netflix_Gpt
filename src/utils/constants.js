@@ -10,7 +10,7 @@ export const LOGO =
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZjY2YzFlODFhN2RlNjNjYTk4OWJiODFjMmMxZGNkNyIsInN1YiI6IjY1YzJmZThiMmZlMmZhMDE4NDI5ZWZhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.6zxc8MRp_xlD5y2TV9t7mHUSkHk_6DjYtUmWHOefeEk",
+      "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -18,4 +18,4 @@ export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/"
 
 export const IMG_BG = "https://assets.nflxext.com/ffe/siteui/vlv3/9134db96-10d6-4a64-a619-a21da22f8999/a449fabb-05e4-4c8a-b062-b0bec7d03085/IN-en-20240115-trifectadaily-perspective_alpha_website_large.jpg"
 
-export const OPENAI_KEY = "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"
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY
